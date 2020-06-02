@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const { prefix, token, guild_id, dm_prefix } = require('./config.json');
-const photo = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.Ulla0oEi_N7XNgmOagMvLwHaEK%26pid%3DApi&f=1";
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();

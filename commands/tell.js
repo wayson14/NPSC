@@ -31,17 +31,29 @@ module.exports = {
             return story;
         }
 
-        function story_sender(story, id_array){
+
+        
+        function story_sender(story, id_array, message){
             if (id_array.length <1) {
                 return console.log('Array of names has appeard too short');
             }
             for (let id of id_array){
                 id.send(story);
             }
+
+            if (message.attachments){
+                message.attachments.forEach(attachment => {
+                    const url = attachment.url;
+                    console.log(url);
+                    for (let id of id_array){
+                        id.send({files: [{attachment:url}]});
+                    }
+                });
+            }
             return console.log('Messages have been sent!');
         }
         const story = story_maker(args);
-        story_sender(story, role_members);
+        story_sender(story, role_members, message);
 
         console.log(`Guild ID: ${guild_id}`);
         console.log(`Role: ${role}, name: ${role.name}, members: ${role_members}`);
