@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-const { prefix, token } = require('./config.json');
-
+const { prefix, token, guild_id, dm_prefix } = require('./config.json');
+const photo = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.Ulla0oEi_N7XNgmOagMvLwHaEK%26pid%3DApi&f=1";
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -24,8 +24,29 @@ client.on('message', message => {
     const args = message.content.slice(prefix.length).split(/ +/);
     const commandName = args.shift().toLowerCase();
 
+    if (message.content.startsWith(dm_prefix)&&message.guild === null){
+        const sink = client.channels.cache.get('717366449211048016');
+        
+        sink.send(message.author.username + ": "  + message.content.slice(dm_prefix.length));
+        console.log("bypass succeed");
+
+        if (message.attachments){
+            message.attachments.forEach(attachment => {
+                // do something with the attachment
+                const url = attachment.url;
+                console.log(url);
+                sink.send({files: [{attachment:url}]});
+                console.log("bypass attachment succeed");
+                return url;
+            });
+        }
+    
+        
+        
+        
+    }
     if (!message.content.startsWith(prefix) || message.author.bot ||
-        !allowedChannel.includes(message.channel.name)) return
+        !allowedChannel.includes(message.channel.name)) return console.log(`channel name: ${message.channel.name}, channel id: ${message.channel.id}, ${message.guild === null}`);
 
 
     const command = client.commands.get(commandName)
