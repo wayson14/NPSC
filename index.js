@@ -24,7 +24,7 @@ client.on('message', message => {
     const commandName = args.shift().toLowerCase();
 
     if (message.content.startsWith(dm_prefix)&&message.guild === null){
-        const sink = client.channels.cache.get('717366449211048016');
+        const sink = client.channels.cache.get('717483569198530680');
         
         sink.send(message.author.username + ": "  + message.content.slice(dm_prefix.length));
         console.log("bypass succeed");
